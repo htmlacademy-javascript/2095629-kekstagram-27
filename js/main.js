@@ -4,7 +4,7 @@ const getRandomInt = (min, max) => {
   max = Math.floor(max);
 
   if (((max < 0) || (min < 0)) || (max === min)) {
-    return NaN
+    return NaN;
   }
 
   if (max < min) {
@@ -14,18 +14,18 @@ const getRandomInt = (min, max) => {
   }
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
-console.log(getRandomInt(0, 140))
+getRandomInt(0, 140);
 // Функция для проверки максимальной длины строки
-const commentText = 'Функция может не гарантировать верный результат, если в переданном диапазоне нет ни одного подходящего числа.';
+const COMMENT_TEXT = 'Функция может не гарантировать верный результат, если в переданном диапазоне нет ни одного подходящего числа.';
 
 const isCorrectLength = (text, maxLenght) => {
   if (text.length > maxLenght) {
-    return false
+    return false;
   }
 
-  return true
-}
+  return true;
+};
 
-console.log(isCorrectLength(commentText, 140));
+isCorrectLength(COMMENT_TEXT, 140);

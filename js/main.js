@@ -20,7 +20,7 @@ getRandomInt(0, 140);
 // Функция для проверки максимальной длины строки
 const COMMENT_TEXT = 'Функция может не гарантировать верный результат, если в переданном диапазоне нет ни одного подходящего числа.';
 
-const isCorrectLength = (text, maxLenght) => {
+const getCorrectLength = (text, maxLenght) => {
   if (text.length > maxLenght) {
     return false;
   }
@@ -28,4 +28,4 @@ const isCorrectLength = (text, maxLenght) => {
   return true;
 };
 
-isCorrectLength(COMMENT_TEXT, 140);
+getCorrectLength(COMMENT_TEXT, 140);

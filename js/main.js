@@ -1,7 +1,4 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно
-const rangeStart = 0;
-const rangeEnd = 140;
-
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -19,9 +16,15 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-console.log(getRandomInt(rangeStart,rangeEnd));
-
 // Функция для проверки максимальной длины строки
-// должна быть универсальна
-// Результат: true, если строка проходит по длине, и false — если не проходит
+const commentText = 'Функция может не гарантировать верный результат, если в переданном диапазоне нет ни одного подходящего числа.';
 
+const isCorrectLength = (text, maxLenght) => {
+  if (text.length > maxLenght) {
+    return false
+  }
+
+  return true
+}
+
+console.log(isCorrectLength(commentText,140));

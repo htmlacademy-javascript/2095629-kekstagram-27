@@ -52,21 +52,21 @@ const getRandomInt = (min, max) => {
 
 const getCorrectLength = (text, maxLenght) => text.length <= maxLenght;
 
-const getRandomELementArray = (array) => array[getRandomInt(0, array.length - 1)];
+const getRandomElementArray = (array) => array[getRandomInt(0, array.length - 1)];
 
-const createMessage = () => getRandomELementArray(MESSAGES);
+const createMessage = () => getRandomElementArray(MESSAGES);
 
 const createComment = (index) => ({
   id: index,
   avatar: `img/avatar-${getRandomInt(AVATAR_COUNT.minimum, AVATAR_COUNT.maximum)}.svg`,
   message: createMessage(),
-  name: getRandomELementArray(NAMES),
+  name: getRandomElementArray(NAMES),
 });
 
 const createPhoto = (index) => ({
   id: index,
   url:  `photos/${index}.jpg`,
-  description: getRandomELementArray(PHOTO_DESCRIPTION),
+  description: getRandomElementArray(PHOTO_DESCRIPTION),
   likes: getRandomInt(LIKES_COUNT.minimum, LIKES_COUNT.maximum),
   comments: Array.from(
     {length: getRandomInt(1,3)},

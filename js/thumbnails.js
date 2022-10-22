@@ -5,15 +5,16 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const fragment = document.createDocumentFragment();
 
 const createPhoto = (photoData) => {
+  const {url, description, likes, comments} = photoData;
   const photoItem = pictureTemplate.cloneNode(true);
   const image = photoItem.querySelector('.picture__img');
-  const likes = photoItem.querySelector('.picture__likes');
+  const likesCount = photoItem.querySelector('.picture__likes');
   const quantityComments = photoItem.querySelector('.picture__comments');
 
-  image.src = photoData['url'];
-  image.alt = photoData['description'];
-  likes.textContent = photoData['likes'];
-  quantityComments.textContent = photoData['comments'].length;
+  image.src = url;
+  image.alt = description;
+  likesCount.textContent = likes;
+  quantityComments.textContent = comments.length;
 
   photoItem.addEventListener('click', () => {
     showBigPicture(photoData);

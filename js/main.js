@@ -1,4 +1,4 @@
 import { renderPhotos } from './thumbnails.js';
 import { getPhotos } from './data.js';
 
-renderPhotos(getPhotos());
+renderPhotos(getPhotos(25));

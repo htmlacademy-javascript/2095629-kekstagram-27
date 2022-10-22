@@ -1,6 +1,7 @@
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const commentsLoader = document.querySelector('.comments-loader');
+const commentCounter = document.querySelector('.social__comment-count');
 const commnetsContainer = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#social-comment').content.querySelector('.social__comment');
 
@@ -8,11 +9,11 @@ const commentTemplate = document.querySelector('#social-comment').content.queryS
 const createComment = (commentData) => {
   const {avatar, message, name} = commentData;
   const commentElement = commentTemplate.cloneNode(true);
-  const image = commentElement.querySelector('.social__picture');
+  const commentatorAvatar = commentElement.querySelector('.social__picture');
   const messageText = commentElement.querySelector('.social__text');
 
-  image.src = avatar;
-  image.atl = name;
+  commentatorAvatar.src = avatar;
+  commentatorAvatar.atl = name;
   messageText.textContent = message;
 
   return commentElement;
@@ -53,6 +54,7 @@ const showBigPicture = (photoData) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
+  commentCounter.classList.add('hidden');
 
   createBigPicture(photoData);
   renderComments(comments);

@@ -1,3 +1,4 @@
+import { showBigPicture } from './big-pictures.js';
 const userPhotosContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -13,6 +14,10 @@ const createPhoto = (photoData) => {
   image.alt = photoData['description'];
   likes.textContent = photoData['likes'];
   quantityComments.textContent = photoData['comments'].length;
+
+  photoItem.addEventListener('click', () => {
+    showBigPicture(photoData);
+  });
 
   return photoItem;
 };

@@ -41,8 +41,6 @@ const NAMES = ['Валера', 'Маша', 'Никита', 'Дима', 'Миша
 
 const LIKES_COUNT = { minimum: 15, maximum: 200};
 const AVATAR_COUNT = { minimum: 1, maximum: 6};
-const PHOTO_COUNT = 25;
-
 
 const createMessage = () => getRandomElementArray(MESSAGES);
 
@@ -64,8 +62,8 @@ const createPhoto = (index) => ({
   ),
 });
 
-const getPhotos = () => Array.from(
-  {length: PHOTO_COUNT},
+const getPhotos = (count) => Array.from(
+  {length: count},
   (_, photoIndex) => createPhoto(photoIndex + 1)
 );
 

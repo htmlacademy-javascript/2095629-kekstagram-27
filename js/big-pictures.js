@@ -55,11 +55,14 @@ const onClickCanselButton = () => {
   hideBigPicture();
 };
 
+const ESC_KEY = 27;
+
 function onEscapeKeyDown(evt) {
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEY) { // А можно ли написать иначе : (evt.key === 'Escape') ?
     hideBigPicture();
   }
 }
+
 
 const showBigPicture = (photoData) => {
   bigPicture.classList.remove('hidden');

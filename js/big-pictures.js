@@ -4,7 +4,7 @@ const commentsLoader = document.querySelector('.comments-loader');
 const commentCounter = document.querySelector('.social__comment-count');
 const commnetsContainer = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#social-comment').content.querySelector('.social__comment');
-
+const canselButton = bigPicture.querySelector('.big-picture__cancel');
 
 const createComment = (commentData) => {
   const {avatar, message, name} = commentData;
@@ -29,15 +29,11 @@ const renderComments = (comments) => {
   });
 
   commnetsContainer.append(socialComments);
+
+  return commnetsContainer;
 };
 
-
-// const hideBigPictures = () => {
-//   body.classList.remove('modal-open');
-//   bigPictures.classList.add('hidden');
-// };
-
-const createBigPicture = ({url, description, likes}) => {
+const createBigPicture = ({url, description, likes, comments}) => {
   const image = bigPicture.querySelector('.big-picture__img').querySelector('img');
   const socialCaption = bigPicture.querySelector('.social__caption');
   const likesCount = bigPicture.querySelector('.likes-count');
@@ -46,18 +42,35 @@ const createBigPicture = ({url, description, likes}) => {
   image.alt = description;
   likesCount.textContent = likes;
   socialCaption.textContent = description;
+  renderComments(comments);
 };
 
-const showBigPicture = (photoData) => {
-  const {comments} = photoData;
+const hideBigPicture = () => {
+  body.classList.remove('modal-open');
+  bigPicture.classList.add('hidden');
+  document.removeEventListener('keydown', onEscapeKeyDown);
+};
 
+const onClickCanselButton = () => {
+  hideBigPicture();
+};
+
+function onEscapeKeyDown(evt) {
+  if (evt.keyCode === 27) {
+    hideBigPicture();
+  }
+}
+
+const showBigPicture = (photoData) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
   commentCounter.classList.add('hidden');
 
+  document.addEventListener('keydown', onEscapeKeyDown);
+
   createBigPicture(photoData);
-  renderComments(comments);
 };
 
+canselButton.addEventListener('click', onClickCanselButton);
 export { showBigPicture };

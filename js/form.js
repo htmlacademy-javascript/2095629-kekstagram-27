@@ -13,14 +13,14 @@ const TAGS_VALID = /^#[a-zа-яё0-9]{1,19}$/i;
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  form.addEventListener('keydown', onEscapeKeyDown);
+  document.addEventListener('keydown', onEscapeKeyDown);
 };
 
 const hideModal = () => {
   form.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  form.removeEventListener('keydown', onEscapeKeyDown);
+  document.removeEventListener('keydown', onEscapeKeyDown);
 };
 
 const isActiveField = () => (document.activeElement === hashtagField) || (document.activeElement === commentField);

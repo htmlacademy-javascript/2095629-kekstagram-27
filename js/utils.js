@@ -15,6 +15,12 @@ const validateHastags = (tags) => {
   return isValidCount(tagList) && tagList.every(isValidHastag);
 };
 
+const showElements = (elements, quantityElementsToShow) => {
+  for (let i = 0; i < quantityElementsToShow && i < elements.length; i++) {
+    elements[i].classList.remove('hidden');
+  }
+};
+
 const getRandomInt = (min, max) => {
   if ((max < 0) || (min < 0)) {
     return NaN;
@@ -29,4 +35,4 @@ getCorrectLength('');
 
 const getRandomElementArray = (array) => array[getRandomInt(0, array.length - 1)];
 
-export {getRandomInt, getRandomElementArray, validateHastags};
+export {getRandomInt, getRandomElementArray, validateHastags, showElements};

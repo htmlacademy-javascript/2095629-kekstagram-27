@@ -1,3 +1,4 @@
+import { showElements } from './utils.js';
 const COUNT_LOAD_COMMENT = 5;
 
 const bigPicture = document.querySelector('.big-picture');
@@ -21,20 +22,24 @@ const createComment = (commentData) => {
   return commentElement;
 };
 
-const hideButtonShowMore = (hiddenComments) => {
+const countsCommentShown = () => {
+  const countsAllComments = commnetsContainer.querySelectorAll('.social__comment').length;
+  const countsHideComments = commnetsContainer.querySelectorAll('.hidden').length;
+  const countsShowComments = countsAllComments - countsHideComments;
+
+  commentCounter.textContent = `${countsShowComments} из ${countsAllComments} комментариев`;
+};
+
+const uploadMoreComments = () => {
+  const hiddenComments = commnetsContainer.querySelectorAll('.hidden');
+
+  showElements(hiddenComments,COUNT_LOAD_COMMENT);
+
   if (hiddenComments.length <= COUNT_LOAD_COMMENT) {
     commentsLoader.classList.add('hidden');
   }
-};
 
-const showMore = () => {
-  const hidden = commnetsContainer.querySelectorAll('.hidden');
-
-  for (let i = 0; i < COUNT_LOAD_COMMENT && i < hidden.length; i++) {
-    hidden[i].classList.remove('hidden');
-  }
-
-  hideButtonShowMore(hidden);
+  countsCommentShown();
 };
 
 const renderComments = (comments) => {
@@ -49,14 +54,14 @@ const renderComments = (comments) => {
 
   commnetsContainer.append(socialComments);
 
-  showMore();
+  uploadMoreComments();
 
   return commnetsContainer;
 };
 
 const onClickUploadCommnent = (evt) => {
   evt.preventDefault();
-  showMore();
+  uploadMoreComments();
 };
 
 const createBigPicture = ({url, description, likes, comments}) => {
@@ -96,7 +101,6 @@ const showBigPicture = (photoData) => {
 
   document.addEventListener('keydown', onEscapeKeyDown);
   commentsLoader.addEventListener('click', onClickUploadCommnent);
-
   createBigPicture(photoData);
 };
 

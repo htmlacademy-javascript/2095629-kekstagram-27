@@ -1,3 +1,5 @@
+const COUNT_LOAD_COMMENT = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const commentsLoader = document.querySelector('.comments-loader');
@@ -19,18 +21,42 @@ const createComment = (commentData) => {
   return commentElement;
 };
 
+const hideButtonShowMore = (hiddenComments) => {
+  if (hiddenComments.length <= COUNT_LOAD_COMMENT) {
+    commentsLoader.classList.add('hidden');
+  }
+};
+
+const showMore = () => {
+  const hidden = commnetsContainer.querySelectorAll('.hidden');
+
+  for (let i = 0; i < COUNT_LOAD_COMMENT && i < hidden.length; i++) {
+    hidden[i].classList.remove('hidden');
+  }
+
+  hideButtonShowMore(hidden);
+};
+
 const renderComments = (comments) => {
   commnetsContainer.innerHTML = '';
   const socialComments = document.createDocumentFragment();
 
   comments.forEach((commentData) => {
     const commentElement = createComment(commentData);
+    commentElement.classList.add('hidden');
     socialComments.append(commentElement);
   });
 
   commnetsContainer.append(socialComments);
 
+  showMore();
+
   return commnetsContainer;
+};
+
+const onClickUploadCommnent = (evt) => {
+  evt.preventDefault();
+  showMore();
 };
 
 const createBigPicture = ({url, description, likes, comments}) => {
@@ -49,6 +75,7 @@ const hideBigPicture = () => {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
   document.removeEventListener('keydown', onEscapeKeyDown);
+  commentsLoader.removeEventListener('click', onClickUploadCommnent);
 };
 
 const onClickCanselButton = () => {
@@ -64,10 +91,11 @@ function onEscapeKeyDown(evt) {
 const showBigPicture = (photoData) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  commentsLoader.classList.add('hidden');
-  commentCounter.classList.add('hidden');
+  commentsLoader.classList.remove('hidden');
+  // commentCounter.classList.add('hidden');
 
   document.addEventListener('keydown', onEscapeKeyDown);
+  commentsLoader.addEventListener('click', onClickUploadCommnent);
 
   createBigPicture(photoData);
 };

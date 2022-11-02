@@ -1,5 +1,6 @@
 import { validateHastags } from './utils.js';
-import { scalePicture } from './scale.js';
+import { resetScalePicture } from './scale.js';
+import { resetEffect } from './effects.js';
 
 const body = document.querySelector('body');
 const overlay = body.querySelector('.img-upload__overlay');
@@ -13,11 +14,12 @@ const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onEscapeKeyDown);
-  scalePicture();
 };
 
 const hideModal = () => {
   form.reset();
+  resetEffect();
+  resetScalePicture();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeKeyDown);

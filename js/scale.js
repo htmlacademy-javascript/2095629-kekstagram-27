@@ -13,26 +13,32 @@ const scalePicture = (value = DEFAULT_SCALE) => {
   inputScale.value = `${value}%`;
 };
 
+let newValueScale = DEFAULT_SCALE;
+
 const onUpScaleButtonClick = () => {
   const currentValue = parseInt(inputScale.value,10);
-  let newValue = currentValue + SCALE_STEP;
-  if (newValue > MAX_SCALE) {
-    newValue = MAX_SCALE;
+  newValueScale = currentValue + SCALE_STEP;
+  if (newValueScale > MAX_SCALE) {
+    newValueScale = MAX_SCALE;
   }
-  scalePicture(newValue);
-  inputScale.value = `${newValue}%`;
+  scalePicture(newValueScale);
+  inputScale.value = `${newValueScale}%`;
 };
 
 const onDownScaleButtonClick = () => {
   const currentValue = parseInt(inputScale.value,10);
-  let newValue = currentValue - SCALE_STEP;
-  if (newValue < MIN_SCALE) {
-    newValue = MIN_SCALE;
+  newValueScale = currentValue - SCALE_STEP;
+  if (newValueScale < MIN_SCALE) {
+    newValueScale = MIN_SCALE;
   }
-  scalePicture(newValue);
-  inputScale.value = `${newValue}%`;
+  scalePicture(newValueScale);
+  inputScale.value = `${newValueScale}%`;
+};
+
+const resetScalePicture = () => {
+  scalePicture();
 };
 
 upScaleButton.addEventListener('click',onUpScaleButtonClick);
 downScaleButton.addEventListener('click',onDownScaleButtonClick);
-export { scalePicture };
+export { resetScalePicture };

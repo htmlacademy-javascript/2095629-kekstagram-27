@@ -1,4 +1,5 @@
 import { validateHastags } from './utils.js';
+import { scalePicture } from './scale.js';
 
 const body = document.querySelector('body');
 const overlay = body.querySelector('.img-upload__overlay');
@@ -12,6 +13,7 @@ const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onEscapeKeyDown);
+  scalePicture();
 };
 
 const hideModal = () => {

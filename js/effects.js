@@ -99,6 +99,7 @@ const onSliderElementUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   picture.classList.add(`effects__preview--${currentEffect.name}`);
   picture.style.filter = `${currentEffect.filter}(${sliderValue}${currentEffect.unit})`;
+  effectLevel.value = sliderValue;
 };
 
 noUiSlider.create(sliderElement,{

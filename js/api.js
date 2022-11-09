@@ -20,10 +20,11 @@ const sendData = (onSuccess, onFail, body) =>
     .then((response) => {
       if (response.ok) {
         onSuccess();
+      } else {
+        onFail();
       }
-      throw new Error('Не удалось отправить данные на сервер'); // собирался удалить и заменить на onFail
     })
-    .catch((error) => onFail(error.message));
+    .catch(() => onFail());
 
 
 export { getData, sendData };

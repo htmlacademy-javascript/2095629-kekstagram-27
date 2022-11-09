@@ -47,8 +47,4 @@ function hideMessage () {
   document.removeEventListener('keydown', onMessageEscKeydown);
 }
 
-// const onSendDataSuccess = () => {
-
-// };
-
-export { /*showMessage,*/ showSuccessMessage, showErrorMessage};
+export {showSuccessMessage, showErrorMessage};

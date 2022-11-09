@@ -82,7 +82,6 @@ const setUserFormSubmit = () => {
         () => {
           unblockSubmitButton();
           showSuccessMessage();
-
           hideModal();
           resetForm();
         },

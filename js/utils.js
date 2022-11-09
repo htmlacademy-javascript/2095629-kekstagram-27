@@ -1,5 +1,28 @@
 const MAX_COUNT_TAGS = 5;
 const TAGS_VALID = /^#[a-zа-яё0-9]{1,19}$/i;
+const ALERT_SHOW_TIME = 5000;
+
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
 
 const getTagList = (tags) => {
   const uniqueHashtags = new Set(tags.toLowerCase().split(' ').filter((tag) => tag.trim()));
@@ -35,4 +58,10 @@ getCorrectLength('');
 
 const getRandomElementArray = (array) => array[getRandomInt(0, array.length - 1)];
 
-export {getRandomInt, getRandomElementArray, validateHastags, showElements};
+export {
+  getRandomInt,
+  getRandomElementArray,
+  validateHastags,
+  showElements,
+  showAlert
+};

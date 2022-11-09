@@ -1,6 +1,9 @@
-import { setUserFormSubmit, hideModal} from './form.js';
+import { setUserFormSubmit } from './form.js';
 import { renderPhotos } from './thumbnails.js';
 import { getData } from './api.js';
+import { showAlert } from './utils.js';
 
-getData((photos) => renderPhotos(photos));
-setUserFormSubmit(hideModal);
+getData(renderPhotos, showAlert);
+
+
+setUserFormSubmit();

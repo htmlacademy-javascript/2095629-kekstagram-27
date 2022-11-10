@@ -1,6 +1,8 @@
-import { validateHastags } from './utils.js';
+import { validateHastags} from './utils.js';
 import { resetScalePicture } from './scale.js';
 import { resetEffect } from './effects.js';
+import { sendData } from './api.js';
+import { showErrorMessage, showSuccessMessage } from './message.js';
 
 const body = document.querySelector('body');
 const overlay = body.querySelector('.img-upload__overlay');
@@ -9,6 +11,23 @@ const fileField = form.querySelector('#upload-file');
 const cancelButton = form.querySelector('.img-upload__cancel');
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
+
+
+const resetForm = () => {
+  form.reset();
+  resetEffect();
+  resetScalePicture();
+};
+
 
 const showModal = () => {
   overlay.classList.remove('hidden');
@@ -17,9 +36,6 @@ const showModal = () => {
 };
 
 const hideModal = () => {
-  form.reset();
-  resetEffect();
-  resetScalePicture();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeKeyDown);
@@ -30,6 +46,7 @@ const isActiveField = () => (document.activeElement === hashtagField) || (docume
 function onEscapeKeyDown(evt) {
   if (evt.key === 'Escape' && !isActiveField()) {
     hideModal();
+    resetForm();
   }
 }
 
@@ -49,11 +66,38 @@ const onFileInputChange = () => {
   showModal();
 };
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+const setUserFormSubmit = () => {
+
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    blockSubmitButton();
+    const isValid = pristine.validate();
+    document.addEventListener('keydown', onEscapeKeyDown);
+
+    if (isValid) {
+
+      const formData = new FormData(evt.target);
+
+      sendData(
+        () => {
+          unblockSubmitButton();
+          showSuccessMessage();
+          hideModal();
+          resetForm();
+        },
+        () => {
+          showErrorMessage();
+          unblockSubmitButton();
+        },
+        formData
+      );
+    } else {
+      showErrorMessage();
+      unblockSubmitButton();
+    }
+  });
 };
 
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', hideModal);
-form.addEventListener('submit', onFormSubmit);
+export { setUserFormSubmit };

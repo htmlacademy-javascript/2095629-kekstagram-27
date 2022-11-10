@@ -1,4 +1,9 @@
+import { setUserFormSubmit } from './form.js';
 import { renderPhotos } from './thumbnails.js';
-import { getPhotos } from './data.js';
-import './form.js';
-renderPhotos(getPhotos(25));
+import { getData } from './api.js';
+import { showAlert } from './utils.js';
+
+getData(renderPhotos, showAlert);
+
+
+setUserFormSubmit();

@@ -2,6 +2,15 @@ const MAX_COUNT_TAGS = 5;
 const TAGS_VALID = /^#[a-zа-яё0-9]{1,19}$/i;
 const ALERT_SHOW_TIME = 5000;
 
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this,rest),timeoutDelay);
+  };
+};
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -63,5 +72,6 @@ export {
   getRandomElementArray,
   validateHastags,
   showElements,
-  showAlert
+  showAlert,
+  debounce
 };

@@ -67,11 +67,34 @@ getCorrectLength('');
 
 const getRandomElementArray = (array) => array[getRandomInt(0, array.length - 1)];
 
+const getRandomArray = (array, countElement) => {
+  if (array.length <= countElement) {
+    return array;
+  }
+
+  let resultArray = [];
+  while (resultArray.length !== countElement) {
+    resultArray.push(getRandomElementArray(array));
+    resultArray = Array.from(new Set(resultArray));
+  }
+  return resultArray;
+};
+
+const comparePhotos = (photoA, photoB) => {
+  const commentA = photoA.comments.length;
+  const commentB = photoB.comments.length;
+  return commentB - commentA;
+};
+
+const sortedByMostDiscussed = (photos) => photos.slice().sort(comparePhotos);
+
 export {
   getRandomInt,
   getRandomElementArray,
   validateHastags,
   showElements,
   showAlert,
-  debounce
+  debounce,
+  getRandomArray,
+  sortedByMostDiscussed
 };

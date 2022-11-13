@@ -4,10 +4,13 @@ import { resetEffect } from './effects.js';
 import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const body = document.querySelector('body');
 const overlay = body.querySelector('.img-upload__overlay');
 const form = body.querySelector('.img-upload__form');
 const fileField = form.querySelector('#upload-file');
+const filePreview = form.querySelector('.img-upload__preview img');
 const cancelButton = form.querySelector('.img-upload__cancel');
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
@@ -64,6 +67,15 @@ pristine.addValidator(
 
 const onFileInputChange = () => {
   showModal();
+  const file = fileField.files[0];
+  const fileName = file.name.toLowerCase();
+
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    filePreview.src = URL.createObjectURL(file);
+  }
 };
 
 const setUserFormSubmit = () => {

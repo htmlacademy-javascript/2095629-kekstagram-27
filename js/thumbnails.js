@@ -35,9 +35,9 @@ const clearPhotos = () => {
 const renderPhotos = (photos) => {
   clearPhotos();
 
-  photos.forEach((photo) => {
-    const photoElement = createPhoto(photo);
-    fragment.append(photoElement);
+  photos.forEach((photoData) => {
+    const photo = createPhoto(photoData);
+    fragment.append(photo);
   });
 
   imageFilters.classList.remove('img-filters--inactive');

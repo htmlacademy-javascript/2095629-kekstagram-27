@@ -2,7 +2,7 @@ const MAX_COUNT_TAGS = 5;
 const TAGS_VALID = /^#[a-zа-яё0-9]{1,19}$/i;
 const ALERT_SHOW_TIME = 5000;
 
-const debounce = (callback, timeoutDelay = 500) => {
+const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {

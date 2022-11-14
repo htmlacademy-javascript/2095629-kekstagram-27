@@ -2,6 +2,7 @@ const SCALE_STEP = 25;
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const DEFAULT_SCALE = 100;
+const CONVETR_TO_SCALE_ARGUMENT = 0.01;
 
 const upScaleButton = document.querySelector('.scale__control--bigger');
 const downScaleButton = document.querySelector('.scale__control--smaller');
@@ -9,7 +10,7 @@ const picture = document.querySelector('.img-upload__preview img');
 const inputScale = document.querySelector('.scale__control--value');
 
 const scalePicture = (value = DEFAULT_SCALE) => {
-  picture.style.transform = `scale(${value / 100})`;
+  picture.style.transform = `scale(${value * CONVETR_TO_SCALE_ARGUMENT})`;
   inputScale.value = `${value}%`;
 };
 

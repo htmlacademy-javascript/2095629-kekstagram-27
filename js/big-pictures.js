@@ -43,7 +43,9 @@ const uploadMoreComments = () => {
 };
 
 const renderComments = (comments) => {
-  commnetsContainer.innerHTML = '';
+  while (commnetsContainer.firstChild) {
+    commnetsContainer.removeChild(commnetsContainer.firstChild);
+  }
   const socialComments = document.createDocumentFragment();
 
   comments.forEach((commentData) => {

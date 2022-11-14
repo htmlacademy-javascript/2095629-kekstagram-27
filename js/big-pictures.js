@@ -11,15 +11,15 @@ const canselButton = bigPicture.querySelector('.big-picture__cancel');
 
 const createComment = (commentData) => {
   const {avatar, message, name} = commentData;
-  const commentElement = commentTemplate.cloneNode(true);
-  const commentatorAvatar = commentElement.querySelector('.social__picture');
-  const messageText = commentElement.querySelector('.social__text');
+  const comment = commentTemplate.cloneNode(true);
+  const commentatorAvatar = comment.querySelector('.social__picture');
+  const messageText = comment.querySelector('.social__text');
 
   commentatorAvatar.src = avatar;
   commentatorAvatar.atl = name;
   messageText.textContent = message;
 
-  return commentElement;
+  return comment;
 };
 
 const countsCommentShown = () => {
@@ -49,9 +49,9 @@ const renderComments = (comments) => {
   const socialComments = document.createDocumentFragment();
 
   comments.forEach((commentData) => {
-    const commentElement = createComment(commentData);
-    commentElement.classList.add('hidden');
-    socialComments.append(commentElement);
+    const comment = createComment(commentData);
+    comment.classList.add('hidden');
+    socialComments.append(comment);
   });
 
   commnetsContainer.append(socialComments);

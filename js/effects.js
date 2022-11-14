@@ -50,7 +50,7 @@ const EFFECTS = [
 
 const picture = document.querySelector('.img-upload__preview img');
 const form = document.querySelector('.img-upload__form');
-const sliderElement = document.querySelector('.effect-level__slider');
+const slider = document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
 
 const DEFAULT_EFFECT = EFFECTS[0];
@@ -60,8 +60,8 @@ let currentEffect = DEFAULT_EFFECT;
 const isDefault = () => currentEffect === DEFAULT_EFFECT;
 
 const updateSlider = () => {
-  sliderElement.classList.remove('hidden');
-  sliderElement.noUiSlider.updateOptions({
+  slider.classList.remove('hidden');
+  slider.noUiSlider.updateOptions({
     range: {
       min: currentEffect.min,
       max: currentEffect.max,
@@ -71,7 +71,7 @@ const updateSlider = () => {
   });
 
   if (isDefault()) {
-    sliderElement.classList.add('hidden');
+    slider.classList.add('hidden');
   }
 };
 
@@ -89,20 +89,20 @@ const onFormChange = (evt) => {
   });
 };
 
-const onSliderElementUpdate = () => {
+const onSliderUpdate = () => {
   picture.style.filter = 'none';
   picture.className = '';
   effectLevel.value = '';
   if (isDefault()) {
-    sliderElement.classList.add('hidden');
+    slider.classList.add('hidden');
   }
-  const sliderValue = sliderElement.noUiSlider.get();
+  const sliderValue = slider.noUiSlider.get();
   picture.classList.add(`effects__preview--${currentEffect.name}`);
   picture.style.filter = `${currentEffect.filter}(${sliderValue}${currentEffect.unit})`;
   effectLevel.value = sliderValue;
 };
 
-noUiSlider.create(sliderElement,{
+noUiSlider.create(slider,{
   range: {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
@@ -125,10 +125,10 @@ noUiSlider.create(sliderElement,{
 
 const resetEffect = () => {
   currentEffect = DEFAULT_EFFECT;
-  onSliderElementUpdate();
+  onSliderUpdate();
 };
 
 form.addEventListener('change', onFormChange);
-sliderElement.noUiSlider.on('update', onSliderElementUpdate);
+slider.noUiSlider.on('update', onSliderUpdate);
 
 export { resetEffect };
